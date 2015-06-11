@@ -4,11 +4,12 @@ This image is intended as a base image for a more complex Nagios 3.5.x setup. By
 
 The first time the application is started, it configures the email and password for the local "nagiosadmin" account. To set these start the container as follows:
 
-    export NAGIOSADM_PW=mysupersecretpassword
-    export NAGIOSADM_EMAIL=email@server.com
+    docker run -dP -e NAGIOSADM_PW=mysupersecretpassword -e NAGIOSADM_EMAIL=email@server.com mhvelplund/nagios
+
+On subsequent runs, only the "docker run" statement is needed.
+
     docker run -dP mhvelplund/nagios
 
-On subsequent runs, only the the "docker run" statement is needed.
 
 The container exposes port 80. Check "``docker ps``"" to see which port it is mapped to.
 
