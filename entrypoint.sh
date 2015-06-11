@@ -12,8 +12,8 @@ if [ ! -f /.configured ]; then
 
 	echo "Configuring Nagios admin account."
 	htpasswd -b -c /usr/local/nagios/etc/htpasswd.users nagiosadmin $NAGIOSADM_PW
-	sed -r "s/nagios@localhost/$NAGIOSADM_EMAIL/" /usr/local/nagios/etc/objects/contacts.cfg > tmp
-	mv tmp /usr/local/nagios/etc/objects/contacts.cfg
+	sed -r "s/nagios@localhost/$NAGIOSADM_EMAIL/" /usr/local/nagios/etc/objects/contacts.cfg > /tmp.cfg
+	mv /tmp.cfg /usr/local/nagios/etc/objects/contacts.cfg
 	touch /.configured
 fi
 
