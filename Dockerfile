@@ -40,10 +40,14 @@ WORKDIR /download/nagios-plugins-2.0.3/
 RUN ./configure --with-nagios-user=nagios --with-nagios-group=nagios
 RUN make
 RUN make install
+WORKDIR /
+
+# Add mail support
+RUN apt-get -y install bsd-mailx postfix
 
 # Cleanup
 RUN rm -rf /download
-RUN apt-get -y remove wget build-essential
+RUN apt-get -y remove build-essential
 RUN apt-get -y autoclean
 RUN apt-get -y clean
 RUN apt-get -y autoremove
