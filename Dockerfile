@@ -6,7 +6,7 @@ MAINTAINER Mads Hvelplund "mhv@tmnet.dk"
 # Install packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update -qq
-RUN apt-get install -y apache2 libapache2-mod-php5 build-essential libgd-dev wget apache2-utils
+RUN apt-get install -y apache2 libapache2-mod-php5 build-essential libgd-dev apache2-utils
 
 # Create the nagios user and groups
 RUN useradd -m nagios
@@ -15,10 +15,9 @@ RUN usermod -a -G nagcmd nagios
 RUN usermod -a -G nagcmd www-data
 
 # Download the software
-RUN mkdir download
+ADD http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-3.5.1.tar.gz /download/nagios-3.5.1.tar.gz
+ADD http://nagios-plugins.org/download/nagios-plugins-2.0.3.tar.gz /download/nagios-plugins-2.0.3.tar.gz
 WORKDIR download
-RUN wget http://prdownloads.sourceforge.net/sourceforge/nagios/nagios-3.5.1.tar.gz
-RUN wget http://nagios-plugins.org/download/nagios-plugins-2.0.3.tar.gz
 RUN tar xvzf nagios-3.5.1.tar.gz
 RUN tar xvzf nagios-plugins-2.0.3.tar.gz
 
